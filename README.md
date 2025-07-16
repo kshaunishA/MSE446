@@ -58,6 +58,5 @@ Why this matters:
 
 ---
 
-## 🧠 Project Structure
 
 
