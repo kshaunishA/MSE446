@@ -20,18 +20,15 @@ df = pd.read_csv(csv_path)
 print("Initial shape:", df.shape)
 print("Initial columns:\n", df.columns)
 
-# 🧹 Data Preprocessing
+# Data Preprocessing
 df.columns = [col.strip().lower().replace(' ', '_') for col in df.columns]
 df = df.dropna()
 print("New shape after dropping NA:", df.shape)
 
-# Convert 'month' to numeric if present
-if 'month' in df.columns:
-    df['month'] = pd.to_datetime(df['month'])
-    df['month_num'] = df['month'].dt.month + 12 * (df['month'].dt.year - df['month'].dt.year.min())
+df['date'] = pd.to_datetime(df['date']).astype('int64')
 
 # Step 4: Choose features and target
-features = ['compbenchmark', 'sfdetachbenchmark', 'sfattachbenchmark']
+features = ['compbenchmark', 'sfdetachbenchmark', 'sfattachbenchmark', 'date']
 if 'month_num' in df.columns:
     features.append('month_num')
 
@@ -48,7 +45,7 @@ X_scaled = scaler.fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
 # ---------------------
-# 🔮 Modeling Section
+# Modeling Section
 # ---------------------
 from sklearn.linear_model import LinearRegression
 from sklearn.neural_network import MLPRegressor
@@ -58,7 +55,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import numpy as np
 
-# 📊 Dictionary to hold model results
+# Dictionary to hold model results
 results = {}
 
 # 1. Linear Regression
@@ -101,14 +98,14 @@ results['KNN'] = {
     "R2": r2_score(y_test, y_pred_knn)
 }
 
-# 🖨️ Print Results
-print("\n🔍 Model Performance:")
+# Print Results
+print("\n Model Performance:")
 for model, metrics in results.items():
-    print(f"\n🔸 {model}")
+    print(f"\n {model}")
     for metric, value in metrics.items():
         print(f"{metric}: {value:.4f}")
 
-# 📊 MAE Bar Chart
+# MAE Bar Chart
 mae_scores = [results[m]["MAE"] for m in results]
 models = list(results.keys())
 
@@ -120,13 +117,13 @@ plt.xlabel("Model")
 plt.show()
 
 # ---------------------
-# 🔬 Reliability Testing Section
+# Reliability Testing Section
 # ---------------------
 print("\n" + "="*50)
 print("🔬 RELIABILITY TESTING")
 print("="*50)
 
-# 📊 Reliability Test Results Storage
+# Reliability Test Results Storage
 reliability_results = {model: {'mae_scores': [], 'r2_scores': []} for model in results.keys()}
 
 # Test with different random seeds
@@ -165,8 +162,8 @@ for seed in seeds:
             reliability_results[model_name]['mae_scores'].append(mae)
             reliability_results[model_name]['r2_scores'].append(r2)
 
-# 📊 Calculate reliability statistics
-print("\n📈 RELIABILITY STATISTICS:")
+# Calculate reliability statistics
+print("\nRELIABILITY STATISTICS:")
 print("-" * 40)
 
 for model_name in reliability_results.keys():
@@ -186,7 +183,7 @@ for model_name in reliability_results.keys():
     print(f"   MAE Range: [{min(mae_scores):.4f}, {max(mae_scores):.4f}]")
     print(f"   R² Range:  [{min(r2_scores):.4f}, {max(r2_scores):.4f}]")
 
-# 📊 Reliability Visualization
+# Reliability Visualization
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
 # MAE Box Plot
@@ -206,8 +203,8 @@ ax2.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
 
-# 🎯 Reliability Assessment
-print("\n🎯 RELIABILITY ASSESSMENT:")
+# Reliability Assessment
+print("\nRELIABILITY ASSESSMENT:")
 print("-" * 30)
 
 # Find most reliable model (lowest coefficient of variation for MAE)
@@ -220,10 +217,10 @@ for model_name in reliability_results.keys():
     reliability_scores[model_name] = cv
 
 most_reliable = min(reliability_scores, key=reliability_scores.get)
-print(f"✅ Most Reliable Model: {most_reliable} (CV: {reliability_scores[most_reliable]:.3f})")
+print(f"Most Reliable Model: {most_reliable} (CV: {reliability_scores[most_reliable]:.3f})")
 
 # Check if results are consistent (low CV indicates consistency)
-print("\n📊 Consistency Check:")
+print("\nConsistency Check:")
 for model, cv in reliability_scores.items():
-    status = "✅ Consistent" if cv < 0.1 else "⚠️ Variable" if cv < 0.2 else "❌ Inconsistent"
+    status = "Consistent" if cv < 0.1 else "Variable" if cv < 0.2 else "Inconsistent"
     print(f"   {model}: {status} (CV: {cv:.3f})")

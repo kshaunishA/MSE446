@@ -1,8 +1,8 @@
-# 🏠 Toronto Housing Price Index Analysis
+# Toronto Housing Price Index Analysis
 
 A comprehensive machine learning analysis of Toronto's housing market using the Toronto Home Price Index dataset from Kaggle. This project implements multiple regression models with reliability testing to predict housing price indices.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -13,11 +13,8 @@ A comprehensive machine learning analysis of Toronto's housing market using the 
 - [Models Implemented](#models-implemented)
 - [Results](#results)
 - [Reliability Testing](#reliability-testing)
-- [Technical Details](#technical-details)
-- [Contributing](#contributing)
-- [License](#license)
 
-## 🎯 Overview
+## Overview
 
 This project analyzes Toronto's housing market data to predict housing price indices using various machine learning algorithms. The analysis includes comprehensive data preprocessing, model training, performance evaluation, and reliability testing to ensure robust results.
 
@@ -28,7 +25,7 @@ This project analyzes Toronto's housing market data to predict housing price ind
 - Conduct reliability testing with different seeds and data splits
 - Visualize results and model comparisons
 
-## ✨ Features
+## Features
 
 - **Automated Data Download**: Uses KaggleHub to automatically download the latest dataset
 - **Comprehensive Preprocessing**: Handles missing values, column cleaning, and feature scaling
@@ -37,7 +34,7 @@ This project analyzes Toronto's housing market data to predict housing price ind
 - **Performance Visualization**: Generates charts and statistical summaries
 - **Robust Evaluation**: Uses MAE, MSE, and R² metrics for comprehensive assessment
 
-## 📊 Dataset
+## Dataset
 
 **Source**: [Toronto Home Price Index](https://www.kaggle.com/datasets/alankmwong/toronto-home-price-index) on Kaggle
 
@@ -55,7 +52,7 @@ This project analyzes Toronto's housing market data to predict housing price ind
 - `SFAttachBenchmark`: Single Family Attached Benchmark
 - `Date`: Time period of the data
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -81,7 +78,7 @@ This project analyzes Toronto's housing market data to predict housing price ind
    python -c "import kagglehub, pandas, sklearn, xgboost; print('All packages installed successfully!')"
    ```
 
-## 📖 Usage
+## Usage
 
 ### Quick Start
 
@@ -111,7 +108,7 @@ The script will output:
 - Reliability testing statistics
 - Visualization charts
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MSE Project/
@@ -124,7 +121,7 @@ MSE Project/
                 └── toronto-home-price-index/
 ```
 
-## 🤖 Models Implemented
+## Models Implemented
 
 ### 1. Linear Regression
 - **Type**: Simple linear model
@@ -148,7 +145,7 @@ MSE Project/
 - **Parameters**: k=5 neighbors
 - **Advantages**: Simple, no training required
 
-## 📈 Results
+## Results
 
 ### Model Performance Comparison
 
@@ -165,7 +162,7 @@ MSE Project/
 - **Lowest Error**: KNN also had the lowest MAE (11.56)
 - **Most Reliable**: MLP showed the most consistent results across different conditions
 
-## 🔬 Reliability Testing
+## Reliability Testing
 
 The project includes comprehensive reliability testing to ensure robust results:
 
@@ -178,20 +175,20 @@ The project includes comprehensive reliability testing to ensure robust results:
 - **Coefficient of Variation (CV)**: Measures consistency
 - **Range Analysis**: Shows performance variability
 - **Consistency Classification**: 
-  - ✅ Consistent (CV < 0.1)
-  - ⚠️ Variable (CV < 0.2)
-  - ❌ Inconsistent (CV ≥ 0.2)
+  - Consistent (CV < 0.1)
+  - Variable (CV < 0.2)
+  - Inconsistent (CV ≥ 0.2)
 
 ### Reliability Results
 
 | Model | CV (MAE) | Consistency Status |
 |-------|----------|-------------------|
-| MLP | 0.025 | ✅ Consistent |
-| Linear | 0.039 | ✅ Consistent |
-| KNN | 0.050 | ✅ Consistent |
-| XGBoost | 0.058 | ✅ Consistent |
+| MLP | 0.025 | Consistent |
+| Linear | 0.039 | Consistent |
+| KNN | 0.050 | Consistent |
+| XGBoost | 0.058 | Consistent |
 
-## 🔧 Technical Details
+## Technical Details
 
 ### Data Preprocessing Steps
 
@@ -226,7 +223,7 @@ KNeighborsRegressor(n_neighbors=5)
 LinearRegression()
 ```
 
-## 📊 Visualization
+## Visualization
 
 The project generates several visualizations:
 
@@ -234,7 +231,7 @@ The project generates several visualizations:
 2. **Reliability Box Plots**: Shows performance distribution across different conditions
 3. **Statistical Summaries**: Detailed performance metrics
 
-## 🛠️ Customization
+## Customization
 
 ### Modifying Features
 
@@ -271,63 +268,9 @@ seeds = [42, 123, 456, 789]  # Add more seeds
 test_sizes = [0.15, 0.2, 0.25, 0.3]  # Add more test sizes
 ```
 
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **"No module named 'kagglehub'"**
-   ```bash
-   pip install kagglehub
-   ```
-
-2. **"No module named 'xgboost'"**
-   ```bash
-   pip install xgboost
-   ```
-
-3. **Convergence warnings for MLP**
-   - These are normal and don't affect results
-   - Can be reduced by increasing `max_iter` or simplifying architecture
-
-4. **Memory issues with large datasets**
-   - Reduce the number of reliability test combinations
-   - Use smaller neural network architectures
-
-### Performance Optimization
-
-- **Faster execution**: Reduce the number of seeds and test sizes
-- **Better accuracy**: Try different feature combinations
-- **More reliable results**: Increase the number of reliability tests
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### How to Contribute
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Dataset**: [Alankmwong](https://www.kaggle.com/alankmwong) for providing the Toronto Home Price Index dataset
 - **Kaggle**: For hosting the dataset
 - **Scikit-learn**: For the machine learning framework
 - **XGBoost**: For the gradient boosting implementation
-
-## 📞 Contact
-
-For questions or support, please open an issue in the repository or contact the project maintainer.
-
----
-
-**Last Updated**: January 2025  
-**Version**: 1.0.0  
-**Python Version**: 3.8+
